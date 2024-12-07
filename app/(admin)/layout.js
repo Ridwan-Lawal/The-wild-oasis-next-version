@@ -8,7 +8,7 @@ function Layout({ children }) {
 
       <div className="flex flex-col flex-grow">
         <Navbar />
-        <div className="border border-blue-800">{children}</div>
+        <div className="border border-blue-800 px-10 py-9">{children}</div>
       </div>
     </div>
   );
