@@ -12,6 +12,10 @@
   .sidebar ul li {
     @apply flex items-center gap-3.5;
   }
+
+  .navbar .icons button {
+    @apply rounded-md p-1 hover:bg-[#f3fafa] transition-colors;
+  }
 }
 
 @layer utilities {
