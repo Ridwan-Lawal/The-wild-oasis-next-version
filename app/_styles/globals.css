@@ -34,9 +34,69 @@
   .section-header .sort select {
     @apply border-t border-gray-100 text-sm py-2 px-3 rounded-md bg-white w-fit shadow-md shadow-gray-100 focus:border focus:border-color-brand;
   }
+
+  /* booking */
+  .booking-options ul li {
+    @apply text-[13px] font-normal flex items-center gap-2;
+  }
+
+  .booking-options ul {
+    @apply text-[13px] border p-3 rounded-md shadow-md space-y-4 bg-white w-[150px];
+  }
+
+  .booking-pagination {
+    @apply flex items-center justify-between;
+  }
+
+  .booking-pagination p {
+    @apply text-[13px] font-normal;
+  }
+
+  .booking-pagination span {
+    @apply font-semibold;
+  }
+
+  .booking-pagination-control {
+    @apply flex gap-3;
+  }
+  .booking-pagination-control button {
+    @apply flex gap-1  hover:bg-color-brand hover:text-white  rounded-md py-[5px] transition items-center;
+  }
+
+  .booking-pagination-control button span {
+    @apply font-normal capitalize;
+  }
 }
 
 @layer utilities {
+  /* booking */
+
+  .booking-subheading {
+    display: grid;
+    grid-template-columns:
+      minmax(min-content, 50px)
+      minmax(min-content, 200px)
+      minmax(min-content, 250px)
+      minmax(min-content, 120px)
+      minmax(min-content, 150px)
+      minmax(min-content, auto);
+    gap: 26px;
+    justify-items: center;
+  }
+
+  .booking-card {
+    display: grid;
+    grid-template-columns:
+      minmax(min-content, 50px)
+      minmax(min-content, 220px)
+      minmax(min-content, 250px)
+      minmax(min-content, 120px)
+      minmax(min-content, 150px)
+      minmax(min-content, auto);
+    justify-items: center;
+    gap: 20px;
+  }
+
   @keyframes rotate {
     to {
       transform: rotate(1turn);

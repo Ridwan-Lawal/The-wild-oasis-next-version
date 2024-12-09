@@ -1,4 +1,4 @@
-import Spinner from "@/app/_components/Spinner";
+import Spinner from "@/app/_ui/Spinner";
 import { LogOut, Moon, User } from "lucide-react";
 import Image from "next/image";
 

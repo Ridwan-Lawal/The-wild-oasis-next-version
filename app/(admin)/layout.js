@@ -1,5 +1,5 @@
-import Navbar from "@/app/_components/Navbar";
-import Sidebar from "@/app/_components/Sidebar";
+import Navbar from "@/app/_ui/Navbar";
+import Sidebar from "@/app/_ui/Sidebar";
 
 function Layout({ children }) {
   return (

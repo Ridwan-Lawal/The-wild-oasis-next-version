@@ -6,14 +6,14 @@ const SORTS = [
   { type: "Sort by amount (low first)", value: "amount-low-first" },
 ];
 
-function BookingsHeader() {
+function SectionHeader() {
   return (
     <div className="section-header flex items-center justify-between gap-5">
       <h1 className="">All Bookings</h1>
 
       <div className="flex gap-5">
         {/* filters */}
-        <div className="filter">
+        <div className="filter ">
           {FILTERS.map((filter, i) => (
             <button key={i}>{filter}</button>
           ))}
@@ -34,4 +34,4 @@ function BookingsHeader() {
   );
 }
 
-export default BookingsHeader;
+export default SectionHeader;

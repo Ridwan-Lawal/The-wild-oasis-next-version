@@ -1,7 +1,7 @@
 import Image from "next/image";
 import logoLight from "@/public/logo-light.png";
 import { Bolt, Calendar, House, Users, Warehouse } from "lucide-react";
-import SidebarLink from "@/app/_components/SidebarLink";
+import SidebarLink from "@/app/_ui/SidebarLink";
 import Home from "@/app/(admin)/page";
 
 const SIDEBARNAV = [
