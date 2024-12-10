@@ -23,6 +23,7 @@ function BookingList({ bookings }) {
         <div key={i}>
           {/* bookings card */}
           <BookingCard
+            booking={booking}
             onClick={() => setBookingOptionsId((cur) => (cur === i ? null : i))}
             bookingOptionsId={bookingOptionsId}
             bookingId={i}

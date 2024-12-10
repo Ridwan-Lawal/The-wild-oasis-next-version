@@ -7,13 +7,16 @@ export const metadata = {
   title: "Bookings",
 };
 
-function Page() {
+async function Page({ searchParams }) {
+  const query = await searchParams;
+
+  const suspenseKey = `${query?.page}`;
   return (
     <div className="space-y-8">
       <SectionHeader />
 
-      <Suspense fallback={<Spinner />}>
-        <Bookings />
+      <Suspense fallback={<Spinner />} key={suspenseKey}>
+        <Bookings pageCountFrUrl={Number(query?.page)} />
       </Suspense>
     </div>
   );

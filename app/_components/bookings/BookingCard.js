@@ -8,10 +8,10 @@ import {
   Trash2,
 } from "lucide-react";
 
-function BookingCard({ bookingOptionsId, bookingId, onClick }) {
+function BookingCard({ bookingOptionsId, bookingId, onClick, booking }) {
   return (
     <div className="bg-white booking-card items-center  px-6 py-3  border-t  ">
-      <p className="border">001</p>
+      <p className="border text-sm">{String(bookingId + 1).padStart(3, "0")}</p>
 
       {/* name and email */}
       <div className="space-y-1 ">

@@ -1,3 +1,4 @@
+import StoreProvider from "@/app/_lib/redux/StoreProvider";
 import "@/app/_styles/globals.css";
 import { Poppins } from "next/font/google";
 
@@ -19,7 +20,9 @@ const poppins = Poppins({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} antialiased`}>{children}</body>
+      <StoreProvider>
+        <body className={`${poppins.className} antialiased`}>{children}</body>
+      </StoreProvider>
     </html>
   );
 }

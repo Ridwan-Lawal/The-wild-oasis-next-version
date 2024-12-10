@@ -1,11 +1,22 @@
 import BookingList from "@/app/_components/BookingList";
 import BookingsPagination from "@/app/_components/bookings/BookingsPagination";
-import { addBookingsOnReload, getBookings } from "@/app/_lib/data/data-service";
+import { NUMBEROFBOOKINGSPERPAGE } from "@/app/_lib/constants";
+import {
+  addBookingsOnReload,
+  getBookings,
+  getBookingsByRange,
+} from "@/app/_lib/data/data-service";
+import { usePagination } from "@/app/_lib/hooks/usePagination";
 
 const BOOKINGHEADINGS = ["cabins", "guest", "dates", "status", "amount", ""];
 
-async function Bookings() {
-  const bookings = await getBookings();
+async function Bookings({ pageCountFrUrl }) {
+  const bookings = await getBookings({
+    pageCountFrUrl,
+    NUMBEROFBOOKINGSPERPAGE,
+  });
+
+  const { bookingsData, from, to, bookingsLength } = bookings;
 
   return (
     <div className="rounded-md border border-gray-20 shadow-md shadow-gray-100 ">
@@ -19,9 +30,13 @@ async function Bookings() {
       </div>
 
       {/* bookings */}
-      <BookingList bookings={bookings} />
+      <BookingList bookings={bookingsData} />
       {/* pagination */}
-      <BookingsPagination />
+      <BookingsPagination
+        bookingsLength={bookingsLength}
+        fromBooking={from}
+        toBooking={to}
+      />
     </div>
   );
 }

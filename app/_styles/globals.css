@@ -60,7 +60,7 @@
     @apply flex gap-3;
   }
   .booking-pagination-control button {
-    @apply flex gap-1  hover:bg-color-brand hover:text-white  rounded-md py-[5px] transition items-center;
+    @apply flex gap-1    rounded-md py-[5px] transition items-center;
   }
 
   .booking-pagination-control button span {
