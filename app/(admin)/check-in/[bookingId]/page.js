@@ -1,8 +1,9 @@
-// dynamic metadata
-export async function generateMetadata({ params }) {}
+import CheckinDetails from "@/app/_components/checkins/CheckinDetails";
 
-function Page({ params }) {
-  return <div>each booking</div>;
+export function generateMetadata() {}
+
+function Page() {
+  return <CheckinDetails />;
 }
 
 export default Page;

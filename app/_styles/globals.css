@@ -21,7 +21,25 @@
     @apply rounded-md p-1 hover:bg-[#f3fafa] transition-colors;
   }
 
+  .btn {
+    @apply border rounded-md text-sm px-4 py-3 font-medium;
+  }
+
+  .btn.positive {
+    @apply bg-color-brand text-white;
+  }
+
+  .btn.negative {
+    @apply bg-color-red-dark text-white;
+  }
+  .btn.neutral {
+    @apply border text-gray-800;
+  }
+
   /* for bookings and cabins */
+  .table {
+    @apply rounded-md border border-gray-200 shadow-md shadow-gray-100 w-full;
+  }
 
   .section-header .filter {
     @apply border-t border-gray-100 p-1 rounded-md flex gap-1 bg-white w-fit shadow-md shadow-gray-100;
@@ -66,6 +84,41 @@
   .booking-pagination-control button span {
     @apply font-normal capitalize;
   }
+
+  /* booking details */
+  .booking-details .email,
+  .id,
+  .observations {
+    @apply text-gray-500 font-normal text-[15px];
+  }
+
+  /* cabin form */
+  .overlay form {
+    @apply min-h-[450px] bg-white max-w-[850px] mx-auto w-full px-10 pb-8 pt-3 rounded-lg shadow-2xl shadow-gray-300;
+  }
+
+  .overlay .field {
+    @apply flex items-center border-b pb-3 mb-3 border-gray-100;
+  }
+  .overlay label {
+    @apply text-sm text-gray-900 w-[30%];
+  }
+
+  .overlay input {
+    @apply text-sm border border-gray-300 rounded-md px-3 py-1.5;
+  }
+
+  .overlay textarea {
+    @apply text-sm border border-gray-300 rounded-md px-3 py-1.5;
+  }
+
+  .overlay input.file {
+    @apply py-0 border-none text-[12.5px] text-slate-500
+    file:py-2 file:px-4 file:rounded-md
+    file:border-0 file:text-sm file:font-bold
+    file:bg-color-brand file:text-gray-100
+    hover:file:bg-color-brand-2 file:transition-all file:cursor-pointer file:mr-4 file:font-sans;
+  }
 }
 
 @layer utilities {
@@ -96,6 +149,21 @@
     justify-items: center;
     gap: 20px;
   }
+
+  /* Cabins */
+  .cabins-list .header {
+    display: grid;
+    grid-template-columns: 15% 24% 24% 10% 15% 10%;
+    gap: 10px;
+  }
+
+  .cabins-card {
+    display: grid;
+    grid-template-columns: 15% 25% 25% 10% 15% 5%;
+    gap: 10px;
+  }
+
+  /* spinner */
 
   @keyframes rotate {
     to {

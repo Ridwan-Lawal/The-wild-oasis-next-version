@@ -1,6 +1,7 @@
 // add the booking data from supabase and play with it
 
 import { bookings } from "@/app/_lib/data/data-booking";
+import { cabins } from "@/app/_lib/data/data-cabins";
 import { createClient } from "@/app/_lib/supabase/server";
 
 export async function addBookingsOnReload() {
@@ -64,4 +65,22 @@ export async function getBookingsByRange() {
   if (error) throw new Error(error.message);
 
   return { count, Bookings };
+}
+
+// CABINS
+
+export async function addCabinsOnReload() {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.from("Cabins").insert(cabins).select();
+
+  if (error) throw new Error(error.message);
+}
+
+export async function getCabins() {
+  const supabase = await createClient();
+  const { data: Cabins, error } = await supabase.from("Cabins").select("*");
+
+  if (error) throw new Error(error.message);
+  return Cabins;
 }

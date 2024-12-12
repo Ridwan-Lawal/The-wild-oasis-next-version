@@ -10,7 +10,7 @@ import {
 
 function BookingCard({ bookingOptionsId, bookingId, onClick, booking }) {
   return (
-    <div className="bg-white booking-card items-center  px-6 py-3  border-t  ">
+    <div className="bg-white booking-card items-center  px-6 py-3  border-t border-gray-100 ">
       <p className="border text-sm">{String(bookingId + 1).padStart(3, "0")}</p>
 
       {/* name and email */}

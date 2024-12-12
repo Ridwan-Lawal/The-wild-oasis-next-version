@@ -14,7 +14,7 @@ const SIDEBARNAV = [
 
 function Sidebar() {
   return (
-    <div className="border border-black h-screen w-[280px] bg-white sidebar flex flex-col items-center justify-start px-8 py-8 gap-12">
+    <div className="border border-black h-screen w-[280px] bg-white sidebar flex flex-col items-center justify-start  px-8 py-8 gap-12  z-20">
       {/* logo */}
 
       <div className="relative h-[108px] w-[200px] ">

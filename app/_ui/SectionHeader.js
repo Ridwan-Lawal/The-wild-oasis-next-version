@@ -1,28 +1,63 @@
-const FILTERS = ["all", "checked out", "checked in", "unconfirmed"];
-const SORTS = [
-  { type: "Sort by date (recent first)", value: "date-recent-first" },
-  { type: "Sort by date (earlier first)", value: "date-earlier-first" },
-  { type: "Sort by amount (high first)", value: "amount-high-first" },
-  { type: "Sort by amount (low first)", value: "amount-low-first" },
-];
+"use client";
 
-function SectionHeader() {
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+function SectionHeader({ filterTypes, sortTypes, section = "bookings" }) {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+  const filterValue = searchParams.get("filter") || "all";
+
+  function onFilter(filter) {
+    console.log(filter);
+    const params = new URLSearchParams(searchParams);
+    if (filter) {
+      params.set("filter", filter);
+    } else {
+      params.delete("filter");
+    }
+
+    router.replace(`${pathname}?${params.toString()}`);
+  }
+
+  function onSort(sort) {
+    console.log(sort);
+    const params = new URLSearchParams(searchParams);
+    if (sort) {
+      params.set("sortBy", sort);
+    } else params.delete("sortBy");
+
+    router.replace(`${pathname}?${params.toString()}`);
+  }
+
   return (
     <div className="section-header flex items-center justify-between gap-5">
-      <h1 className="">All Bookings</h1>
+      <h1 className="">All {section}</h1>
 
       <div className="flex gap-5">
         {/* filters */}
         <div className="filter ">
-          {FILTERS.map((filter, i) => (
-            <button key={i}>{filter}</button>
+          {filterTypes.map((filterType, i) => (
+            <button
+              key={i}
+              onClick={() => onFilter(filterType)}
+              className={`${
+                filterType === filterValue ? "bg-color-brand text-white" : ""
+              }`}
+            >
+              {filterType}
+            </button>
           ))}
         </div>
 
         {/* sort */}
         <div className="sort">
-          <select name="sort" id="sort">
-            {SORTS.map((sort, i) => (
+          <select
+            onChange={(e) => onSort(e.target.value)}
+            name="sort"
+            id="sort"
+          >
+            {sortTypes.map((sort, i) => (
               <option key={i} value={sort.value}>
                 {sort.type}
               </option>

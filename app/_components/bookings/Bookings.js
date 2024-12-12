@@ -1,4 +1,4 @@
-import BookingList from "@/app/_components/BookingList";
+import BookingList from "@/app/_components/bookings/BookingList";
 import BookingsPagination from "@/app/_components/bookings/BookingsPagination";
 import { NUMBEROFBOOKINGSPERPAGE } from "@/app/_lib/constants";
 import {
@@ -19,7 +19,7 @@ async function Bookings({ pageCountFrUrl }) {
   const { bookingsData, from, to, bookingsLength } = bookings;
 
   return (
-    <div className="rounded-md border border-gray-20 shadow-md shadow-gray-100 ">
+    <div className="table ">
       {/* bookings subheading */}
       <div className="booking-subheading px-6 py-4">
         {BOOKINGHEADINGS.map((heading, i) => (
