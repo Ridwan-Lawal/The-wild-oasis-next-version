@@ -4,7 +4,7 @@ import Image from "next/image";
 
 function Navbar() {
   return (
-    <nav className="border py-4  navbar flex justify-end pr-10 w-full bg-white fixed right-0">
+    <nav className="border py-4  navbar flex justify-end pr-10  bg-white  right-0">
       <div className="flex items-center gap-8  ">
         {/* avatar */}
         <div className="flex items-center gap-3">

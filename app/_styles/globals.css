@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-[#f9fdfd] text-[#4b5563] font-medium;
+    @apply bg-[#f9fafb] text-[#4b5563] font-medium;
   }
 
   h1 {
@@ -119,6 +119,26 @@
     file:bg-color-brand file:text-gray-100
     hover:file:bg-color-brand-2 file:transition-all file:cursor-pointer file:mr-4 file:font-sans;
   }
+
+  /* user registration */
+  .registration form {
+    @apply bg-white mx-auto w-full px-10 pb-8 py-8 rounded-lg shadow-2xl shadow-gray-100;
+  }
+
+  .registration .field {
+    @apply flex items-center gap-8 border-b pb-4 mb-3 border-gray-100;
+  }
+  .registration label {
+    @apply text-sm text-gray-900 w-[30%];
+  }
+
+  .registration input {
+    @apply text-sm border border-gray-300 rounded-md px-3 py-2;
+  }
+
+  .registration .password {
+    @apply text-sm border border-gray-300 rounded-md flex items-center pr-3 gap-2;
+  }
 }
 
 @layer utilities {
@@ -185,5 +205,13 @@
       #000 0
     );
     animation: rotate 1.5s infinite linear;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }

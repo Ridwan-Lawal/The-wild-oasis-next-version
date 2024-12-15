@@ -1,5 +1,6 @@
 import CabinsCard from "@/app/_components/cabins/CabinsCard";
 import CabinsLists from "@/app/_components/cabins/CabinsLists";
+import NewCabinBtn from "@/app/_components/cabins/NewCabinBtn";
 import NewCabinForm from "@/app/_components/cabins/NewCabinForm";
 import { addCabinsOnReload, getCabins } from "@/app/_lib/data/data-service";
 
@@ -22,9 +23,9 @@ async function Cabins() {
         {/* cabins list */}
         <CabinsLists cabins={cabins} />
       </div>
-      <button className="btn positive mt-4">Add new cabin</button>
+      <NewCabinBtn />
 
-      {/* <NewCabinForm /> */}
+      <NewCabinForm />
     </div>
   );
 }

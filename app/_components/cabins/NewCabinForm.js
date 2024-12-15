@@ -1,11 +1,31 @@
-import { sono } from "@/app/_styles/font";
+"use client";
+
+import { addNewCabinAction } from "@/app/_lib/action";
+import {
+  getCabinStates,
+  onOpenNewCabinForm,
+} from "@/app/_lib/redux/cabinSlice";
+
 import { XIcon } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
 
 function NewCabinForm() {
+  const { isNewCabinFormOpen } = useSelector(getCabinStates);
+  const dispatch = useDispatch();
+
   return (
-    <div className="overlay absolute backdrop-blur-[7px] h-screen w-screen top-0  right-0 left-0 flex items-center justify-center ">
+    <div
+      className={`overlay absolute backdrop-blur-[7px] h-screen w-screen top-0 flex right-0 z-50  items-center justify-center border-2 border-purple-800 ${
+        isNewCabinFormOpen ? "h-full" : "h-0 overflow-hidden"
+      } `}
+    >
       {/* modal */}
-      <form action="" className="modal">
+      <form
+        action={addNewCabinAction}
+        className={`modal ${
+          isNewCabinFormOpen ? "scale-100" : "scale-90"
+        } transition-all ease-in-out scale-120`}
+      >
         <p className="flex justify-end text-gray-400 cursor-pointer">
           <XIcon />
         </p>
@@ -72,7 +92,11 @@ function NewCabinForm() {
         </div>
 
         <div className="flex gap-4 items-center justify-end">
-          <button type="reset" className="btn neutral">
+          <button
+            type="reset"
+            className="btn neutral"
+            onClick={() => dispatch(onOpenNewCabinForm())}
+          >
             Cancel
           </button>
 
