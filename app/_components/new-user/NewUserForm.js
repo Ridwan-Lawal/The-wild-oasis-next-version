@@ -1,17 +1,22 @@
 "use client";
 
+import { userSignupAction } from "@/app/_lib/action";
 import {
   getUserStates,
   togglePasswordVisibility,
 } from "@/app/_lib/redux/userSlice";
 import { EyeIcon, EyeOff, XIcon } from "lucide-react";
-import { useRef, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
 function NewUserForm() {
   const passwordRef = useRef(null);
   const { isShowPassword } = useSelector(getUserStates);
   const dispatch = useDispatch();
+  const [state, formAction, isPending] = useActionState(userSignupAction, null);
+
+  console.log(state, state?.errors);
 
   function handleShowPassword() {
     const passwordInputField = passwordRef.current;
@@ -27,15 +32,32 @@ function NewUserForm() {
     console.log(passwordInputField.type, "after");
     console.log(isShowPassword);
   }
+
+  useEffect(() => {
+    if (state?.signupStatus === "success") {
+      toast.success(state?.successMsg);
+    } else if (state?.signupStatus === "fail") {
+      alert(state?.errors);
+      toast.error(state?.errors);
+    }
+  }, [state]);
+
   return (
     <div className="registration py-8">
-      <form action="" className="modal">
+      <form action={formAction} className="modal">
         {/* cabin name */}
         <div className="field">
           <label htmlFor="fullname" className="">
             Fullname
           </label>
-          <input type="text" name="fullname" id="fullname" className="" />
+          <div>
+            <input type="text" name="fullname" id="fullname" className="" />
+            {state?.fullname && (
+              <p className="text-[11px] italic text-color-red-dark font-normal mt-1">
+                {state?.fullname}
+              </p>
+            )}
+          </div>
         </div>
 
         {/* Maximum capacity */}
@@ -43,7 +65,14 @@ function NewUserForm() {
           <label htmlFor="email-address" className="">
             Email address
           </label>
-          <input type="text" name="email-address" id="email-address" />
+          <div>
+            <input type="text" name="email-address" id="email-address" />
+            {state?.email && (
+              <p className="text-[11px] italic text-color-red-dark font-normal mt-1">
+                {state?.email}
+              </p>
+            )}
+          </div>
         </div>
 
         {/* Regular Price */}
@@ -51,22 +80,29 @@ function NewUserForm() {
           <label htmlFor="password" className="">
             Password (min 8 characters)
           </label>
-          <div className="password">
-            <input
-              ref={passwordRef}
-              type={isShowPassword ? "text" : "password"}
-              name="password"
-              id="password"
-              className="border-none focus:outline-none"
-            />
+          <div>
+            <div className="password">
+              <input
+                ref={passwordRef}
+                type={isShowPassword ? "text" : "password"}
+                name="password"
+                id="password"
+                className="border-none focus:outline-none"
+              />
 
-            <span className="cursor-pointer" onClick={handleShowPassword}>
-              {isShowPassword ? (
-                <EyeOff className="text-gray-300 size-5" />
-              ) : (
-                <EyeIcon className="text-gray-300 size-5" />
-              )}
-            </span>
+              <span className="cursor-pointer" onClick={handleShowPassword}>
+                {isShowPassword ? (
+                  <EyeOff className="text-gray-300 size-5" />
+                ) : (
+                  <EyeIcon className="text-gray-300 size-5" />
+                )}
+              </span>
+            </div>
+            {state?.password && (
+              <p className="text-[11px] italic text-color-red-dark font-normal mt-1">
+                {state?.password}
+              </p>
+            )}
           </div>
         </div>
 
@@ -75,20 +111,27 @@ function NewUserForm() {
           <label htmlFor="repeat-password" className="">
             Repeat password
           </label>
-          <div className="password">
-            <input
-              type={isShowPassword ? "text" : "password"}
-              name="password"
-              id="password"
-              className="border-none focus:outline-none"
-            />
-            <span className="cursor-pointer" onClick={handleShowPassword}>
-              {isShowPassword ? (
-                <EyeOff className="text-gray-300 size-5" />
-              ) : (
-                <EyeIcon className="text-gray-300 size-5" />
-              )}
-            </span>
+          <div>
+            <div className="password">
+              <input
+                type={isShowPassword ? "text" : "password"}
+                name="repeat-password"
+                id="repeat-password"
+                className="border-none focus:outline-none"
+              />
+              <span className="cursor-pointer" onClick={handleShowPassword}>
+                {isShowPassword ? (
+                  <EyeOff className="text-gray-300 size-5" />
+                ) : (
+                  <EyeIcon className="text-gray-300 size-5" />
+                )}
+              </span>
+            </div>
+            {state?.repeatPassword && (
+              <p className="text-[11px] italic text-color-red-dark font-normal mt-1">
+                {state?.repeatPassword}
+              </p>
+            )}
           </div>
         </div>
 
@@ -97,8 +140,8 @@ function NewUserForm() {
             Cancel
           </button>
 
-          <button type="submit" className="btn positive">
-            Create new cabin
+          <button disabled={isPending} type="submit" className="btn positive">
+            {isPending ? "Creating account..." : "Create new cabin"}
           </button>
         </div>
       </form>
