@@ -1,56 +1,133 @@
 "use client";
 
-import { addNewCabinAction } from "@/app/_lib/action";
+import CabinFormbtn from "@/app/_components/cabins/CabinFormbtn";
+import { addNewCabinAction, editCabinAction } from "@/app/_lib/action";
 import {
   getCabinStates,
+  onEditCabin,
   onOpenNewCabinForm,
 } from "@/app/_lib/redux/cabinSlice";
 
 import { XIcon } from "lucide-react";
+import { useActionState, useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
 function NewCabinForm() {
-  const { isNewCabinFormOpen } = useSelector(getCabinStates);
+  const { isNewCabinFormOpen, cabinToEditData, cabinMutationType } =
+    useSelector(getCabinStates);
   const dispatch = useDispatch();
+  const [state, formAction, isPending] = useActionState(
+    addNewCabinAction,
+    null
+  );
+  const ref = useRef(null);
+
+  console.log(state, state?.status === "success");
+
+  useEffect(() => {
+    if (state?.status === "success") {
+      toast.success(state.msg);
+      dispatch(onOpenNewCabinForm(""));
+      dispatch(onEditCabin({}));
+    } else if (state?.status === "fail") {
+      toast.error(state.msg);
+    }
+  }, [state, dispatch]);
 
   return (
     <div
-      className={`overlay absolute backdrop-blur-[7px] h-screen w-screen top-0 flex right-0 z-50  items-center justify-center border-2 border-purple-800 ${
-        isNewCabinFormOpen ? "h-full" : "h-0 overflow-hidden"
+      className={`overlay fixed left-0 backdrop-blur-[7px] h-screen  top-0 flex  z-50  items-center justify-center border-2 border-purple-800 ${
+        isNewCabinFormOpen ? "w-screen" : "w-0 overflow-hidden"
       } `}
     >
       {/* modal */}
       <form
-        action={addNewCabinAction}
+        action={formAction}
         className={`modal ${
-          isNewCabinFormOpen ? "scale-100" : "scale-90"
-        } transition-all ease-in-out scale-120`}
+          isNewCabinFormOpen ? "scale-100 w-full" : "scale-90 w-0"
+        } transition-all ease-in-out `}
       >
         <p className="flex justify-end text-gray-400 cursor-pointer">
           <XIcon />
         </p>
+
+        {/* cabinId */}
+        <input
+          type="hidden"
+          name="cabinId"
+          id="cabinId"
+          value={cabinToEditData?.id}
+        />
+
+        {/* cabinMutationType('create', 'edit') */}
+        <input
+          type="hidden"
+          name="cabinMutationType"
+          id="cabinMutationType"
+          value={cabinMutationType}
+        />
+
         {/* cabin name */}
         <div className="field">
-          <label htmlFor="cabin-name" className="">
+          <label htmlFor="name" className="">
             Cabin name
           </label>
-          <input type="text" name="cabin-name" id="cabin-name" className="" />
+          <div>
+            <input
+              defaultValue={cabinToEditData?.name || ""}
+              type="text"
+              name="name"
+              id="name"
+              className=""
+            />
+            {state?.name?.at(0) && (
+              <p className="text-[12px] text-red-500 italic mt-1.5">
+                {state?.name?.at(0)}
+              </p>
+            )}
+          </div>
         </div>
 
         {/* Maximum capacity */}
         <div className="field">
-          <label htmlFor="maximum-capacity" className="">
+          <label htmlFor="maxCapacity" className="">
             Maximum capacity
           </label>
-          <input type="number" name="maximum-capacity" id="maximum-capacity" />
+          <div>
+            <input
+              type="number"
+              name="maxCapacity"
+              id="maxCapacity"
+              defaultValue={cabinToEditData?.maxCapacity || 0}
+            />
+
+            {state?.maxCapacity?.at(0) && (
+              <p className="text-[12px] text-red-500 italic mt-1.5">
+                {state?.maxCapacity?.at(0)}
+              </p>
+            )}
+          </div>
         </div>
 
         {/* Regular Price */}
         <div className="field">
-          <label htmlFor="regular-price" className="">
+          <label htmlFor="regularPrice" className="">
             Regular price
           </label>
-          <input type="number" name="regular-price" id="regular-price" />
+          <div>
+            <input
+              type="number"
+              name="regularPrice"
+              id="regularPrice"
+              defaultValue={cabinToEditData?.regularPrice || 0}
+            />
+            {state?.regularPrice?.at(0) && (
+              <p className="text-[12px] text-red-500 italic mt-1.5">
+                {state?.regularPrice?.at(0)}
+              </p>
+            )}
+          </div>
         </div>
 
         {/* discount */}
@@ -58,7 +135,19 @@ function NewCabinForm() {
           <label htmlFor="discount" className="">
             Discount
           </label>
-          <input type="number" name="discount" id="discount" />
+          <div>
+            <input
+              type="number"
+              name="discount"
+              id="discount"
+              defaultValue={cabinToEditData?.discount || 0}
+            />
+            {state?.discount?.at(0) && (
+              <p className="text-[12px] text-red-500 italic mt-1.5">
+                {state?.discount?.at(0)}
+              </p>
+            )}
+          </div>
         </div>
 
         {/* description */}
@@ -68,31 +157,43 @@ function NewCabinForm() {
             Description for website
           </label>
 
-          <textarea
-            rows={3}
-            cols={15}
-            name="description"
-            id="description"
-          ></textarea>
+          <div>
+            <textarea
+              rows={3}
+              cols={15}
+              name="description"
+              id="description"
+              defaultValue={cabinToEditData?.description || ""}
+            ></textarea>
+
+            {state?.description?.at(0) && (
+              <p className="text-[12px] text-red-500 italic mt-1.5">
+                {state?.description?.at(0)}
+              </p>
+            )}
+          </div>
         </div>
 
         {/* cabin photo */}
 
         <div className="field ">
-          <label htmlFor="cabin-photo" className="">
+          <label htmlFor="image" className="">
             Cabin photo
           </label>
 
-          <input
-            type="file"
-            name="cabin-photo"
-            id="cabin-photo"
-            className="file"
-          />
+          <div>
+            <input type="file" name="image" id="image" className="file" />
+            {state?.image?.at(0) && (
+              <p className="text-[12px] text-red-500 italic mt-1.5">
+                {state?.image?.at(0)}
+              </p>
+            )}
+          </div>
         </div>
 
         <div className="flex gap-4 items-center justify-end">
           <button
+            disabled={isPending}
             type="reset"
             className="btn neutral"
             onClick={() => dispatch(onOpenNewCabinForm())}
@@ -100,9 +201,15 @@ function NewCabinForm() {
             Cancel
           </button>
 
-          <button type="submit" className="btn positive">
-            Create new cabin
-          </button>
+          {cabinMutationType === "create" ? (
+            <CabinFormbtn isPending={isPending}>
+              {isPending ? "Creating cabin..." : "Create new cabin"}
+            </CabinFormbtn>
+          ) : (
+            <CabinFormbtn isPending={isPending}>
+              {isPending ? "Editing cabin..." : "Edit cabin"}
+            </CabinFormbtn>
+          )}
         </div>
       </form>
     </div>
@@ -110,3 +217,5 @@ function NewCabinForm() {
 }
 
 export default NewCabinForm;
+// continue to add the cabin
+// also do the discount validation, the discount must be less than the regular price

@@ -37,7 +37,6 @@ function NewUserForm() {
     if (state?.signupStatus === "success") {
       toast.success(state?.successMsg);
     } else if (state?.signupStatus === "fail") {
-      alert(state?.errors);
       toast.error(state?.errors);
     }
   }, [state]);
@@ -140,8 +139,14 @@ function NewUserForm() {
             Cancel
           </button>
 
-          <button disabled={isPending} type="submit" className="btn positive">
-            {isPending ? "Creating account..." : "Create new cabin"}
+          <button
+            disabled={isPending}
+            type="submit"
+            className={`btn positive ${
+              isPending ? "opacity-80" : "opacity-100"
+            } `}
+          >
+            {isPending ? "Creating account..." : "Create new account"}
           </button>
         </div>
       </form>

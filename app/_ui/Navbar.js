@@ -1,3 +1,4 @@
+import Signout from "@/app/_ui/Signout";
 import Spinner from "@/app/_ui/Spinner";
 import { LogOut, Moon, User } from "lucide-react";
 import Image from "next/image";
@@ -29,9 +30,7 @@ function Navbar() {
             <Moon className="size-5" />
           </button>
 
-          <button>
-            <LogOut className="size-5" />
-          </button>
+          <Signout />
         </div>
       </div>
     </nav>

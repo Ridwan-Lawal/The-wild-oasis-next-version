@@ -8,7 +8,10 @@ export const metadata = {
   title: "Cabins",
 };
 
-function Page() {
+async function Page({ searchParams }) {
+  const query = await searchParams;
+  console.log(query);
+  const queryData = `${query?.filter}-${query?.sortBy}`;
   return (
     <div>
       <div>
@@ -18,8 +21,8 @@ function Page() {
           section="cabins"
         />
 
-        <Suspense fallback={<Spinner />}>
-          <Cabins />
+        <Suspense fallback={<Spinner />} key={queryData}>
+          <Cabins filterType={query?.filter} />
         </Suspense>
       </div>
     </div>

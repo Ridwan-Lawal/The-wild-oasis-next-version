@@ -1,4 +1,5 @@
 import StoreProvider from "@/app/_lib/redux/StoreProvider";
+import { createClient } from "@/app/_lib/supabase/server";
 import "@/app/_styles/globals.css";
 import { Poppins } from "next/font/google";
 import { Toaster } from "react-hot-toast";
@@ -18,7 +19,10 @@ const poppins = Poppins({
   fallback: ["system-ui", "Arial"],
 });
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const supabase = await createClient();
+  const session = await supabase.auth.getUser();
+
   return (
     <html lang="en">
       <StoreProvider>
@@ -28,11 +32,11 @@ export default function RootLayout({ children }) {
             position="top-center"
             toastOptions={{
               style: {
-                fontSize: "14px",
-                paddingTop: "8px",
-                paddingBottom: "8px",
-                paddingRight: "24px",
-                paddingLeft: "24px",
+                fontSize: "16px",
+                paddingTop: "10px",
+                paddingBottom: "10px",
+                paddingRight: "30px",
+                paddingLeft: "30px",
                 fontWeight: "normal",
               },
             }}

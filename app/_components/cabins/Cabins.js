@@ -1,3 +1,4 @@
+import CabinDeleteModal from "@/app/_components/cabins/CabinDeleteModal";
 import CabinsCard from "@/app/_components/cabins/CabinsCard";
 import CabinsLists from "@/app/_components/cabins/CabinsLists";
 import NewCabinBtn from "@/app/_components/cabins/NewCabinBtn";
@@ -6,8 +7,8 @@ import { addCabinsOnReload, getCabins } from "@/app/_lib/data/data-service";
 
 const CABINS_HEADER = ["", "cabin", "quantity", "price", "discount", ""];
 
-async function Cabins() {
-  const cabins = await getCabins();
+async function Cabins({ filterType }) {
+  const cabins = await getCabins(filterType);
   return (
     <div>
       <div className="cabins-list table mt-8">

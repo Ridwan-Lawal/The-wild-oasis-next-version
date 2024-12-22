@@ -14,7 +14,7 @@ export const BOOKING_SORTS = [
   { type: "Sort by amount (low first)", value: "amount-low-first" },
 ];
 
-export const CABINS_FILTERS = ["all", "no discount", "with discount"];
+export const CABINS_FILTERS = ["all", "no-discount", "with-discount"];
 
 export const CABINS_SORTS = [
   { type: "Sort by name (A-Z)", value: "name-asc" },

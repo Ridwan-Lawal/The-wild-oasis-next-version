@@ -33,6 +33,12 @@ export async function updateSession(request) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // get user_role
+  const { data, user_role } = await supabase
+    .from("profiles")
+    .select()
+    .eq("user_id", user?.id);
+
   if (
     !user &&
     !request.nextUrl.pathname.startsWith("/sign-in") &&
@@ -42,6 +48,12 @@ export async function updateSession(request) {
     // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
     url.pathname = "/sign-in";
+    return NextResponse.redirect(url);
+  }
+
+  if (user && request.nextUrl.pathname.startsWith("/sign-in")) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
     return NextResponse.redirect(url);
   }
 

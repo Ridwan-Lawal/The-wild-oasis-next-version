@@ -1,6 +1,6 @@
 "use client";
 
-import { onOpenNewCabinForm } from "@/app/_lib/redux/cabinSlice";
+import { onEditCabin, onOpenNewCabinForm } from "@/app/_lib/redux/cabinSlice";
 import { useDispatch } from "react-redux";
 
 function NewCabinBtn() {
@@ -8,7 +8,10 @@ function NewCabinBtn() {
 
   return (
     <button
-      onClick={() => dispatch(onOpenNewCabinForm())}
+      onClick={() => {
+        dispatch(onOpenNewCabinForm("create"));
+        dispatch(onEditCabin({}));
+      }}
       className="btn positive mt-4 "
     >
       Add new cabin

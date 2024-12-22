@@ -55,11 +55,11 @@
 
   /* booking */
   .booking-options ul li {
-    @apply text-[13px] font-normal flex items-center gap-2;
+    @apply text-[13px] font-normal flex items-center gap-2 hover:bg-gray-100 py-2 px-1.5 cursor-pointer transition-colors;
   }
 
   .booking-options ul {
-    @apply text-[13px] border p-3 rounded-md shadow-md space-y-4 bg-white w-[150px];
+    @apply text-[13px] border py-3 px-1.5 rounded-md shadow-md space-y-1 bg-white w-[150px];
   }
 
   .booking-pagination {
@@ -105,11 +105,11 @@
   }
 
   .overlay input {
-    @apply text-sm border border-gray-300 rounded-md px-3 py-1.5;
+    @apply text-sm border border-gray-300 w-[260px] rounded-md px-3 py-1.5;
   }
 
   .overlay textarea {
-    @apply text-sm border border-gray-300 rounded-md px-3 py-1.5;
+    @apply text-sm border border-gray-300 rounded-md px-3 py-1.5 w-[230px];
   }
 
   .overlay input.file {
@@ -129,11 +129,11 @@
     @apply flex items-center gap-8 border-b pb-4 mb-3 border-gray-100;
   }
   .registration label {
-    @apply text-sm text-gray-900 w-[30%];
+    @apply text-[15px] text-gray-900 w-[30%];
   }
 
   .registration input {
-    @apply text-sm border border-gray-300 rounded-md px-3 py-2;
+    @apply border border-gray-300 rounded-md px-3 py-2;
   }
 
   .registration .password {
@@ -150,11 +150,11 @@
   }
 
   .sign-in label {
-    @apply text-[13px];
+    @apply text-[14px];
   }
 
   .sign-in input {
-    @apply border-gray-300 border rounded-md text-sm px-4 py-[7px];
+    @apply border-gray-300 border rounded-md text-[14px] px-4 py-[7px];
   }
 
   .sign-in .error-msg {

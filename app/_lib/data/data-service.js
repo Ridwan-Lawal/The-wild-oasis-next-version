@@ -77,9 +77,23 @@ export async function addCabinsOnReload() {
   if (error) throw new Error(error.message);
 }
 
-export async function getCabins() {
+export async function getCabins(filter = "all") {
+  console.log(filter, "okay");
   const supabase = await createClient();
-  const { data: Cabins, error } = await supabase.from("Cabins").select("*");
+  let query = supabase.from("Cabins").select("*");
+
+  if (filter === "all") {
+    query = query;
+  }
+  if (filter === "with-discount") {
+    query = query.gt("discount", 0);
+  }
+
+  if (filter === "no-discount") {
+    query = query.eq("discount", 0);
+  }
+
+  const { data: Cabins, error } = await query;
 
   if (error) throw new Error(error.message);
   return Cabins;
