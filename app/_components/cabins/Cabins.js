@@ -32,3 +32,5 @@ async function Cabins({ filterType }) {
 }
 
 export default Cabins;
+
+// handle the cabins sorting
